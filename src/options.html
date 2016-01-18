@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WHMCS Notifier Options</title>
+  <link href="options.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <section>
+    <h1>Your WHMCS admin URL:</h1>
+    <div class="setting">
+      <input id="whmcs_url_input" type="text" placeholder="https://">
+    </div>
+  </section>
+  <section>
+    <h1>Monitor:</h1>
+    <div class="setting">
+      <label><input id="monitor_orders_input" type="checkbox"> Pending Orders</label>
+      <label><input id="monitor_tickets_input" type="checkbox"> Pending Tickets</label>
+    </div>
+  </section>
+  <button type="submit">Save Settings</button>
+  <p id="result">Your settings have been saved.</p>
+  <script src="options.js"></script>
+</body>
+</html>

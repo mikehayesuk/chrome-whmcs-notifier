@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "WHMCS Notifier",
+  "description": "Monitor for pending tickets and orders in WHMCS.",
+  "icons": {
+    "16": "icons/16px.png",
+    "48": "icons/48px.png",
+    "128": "icons/128px.png"
+  },
+  "version": "1.0.0",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/browser_disabled@1x.png",
+      "38": "icons/browser_disabled@2x.png"
+    }
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "alarms",
+    "storage",
+    "tabs",
+    "notifications",
+    "*://*/"
+  ]
+}
