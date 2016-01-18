@@ -146,9 +146,14 @@
 
   function handleTabReload(tabId, changeInfo, tab) {
     if (changeInfo.status == 'complete' && tab.url && CONFIG.whmcsUrl && tab.url.indexOf(CONFIG.whmcsUrl) === 0) {
-      chrome.tabs.executeScript(tab.id, {
-        file: 'content.js'
-      });
+      var page = tab.url.substr(CONFIG.whmcsUrl.length);
+      var excludedPages = ['whmcsconnect.php'];
+
+      if (excludedPages.indexOf(page) == -1) {
+        chrome.tabs.executeScript(tab.id, {
+          file: 'content.js'
+        });
+      }
     }
   }
 

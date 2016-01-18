@@ -30,6 +30,9 @@ This was created for my own personal needs as a quick weekend project. The sourc
 ##### 2015-01-17 1.0.0
 First version released, Hello World!
 
+##### 2015-01-17 1.0.1
+Fixed a syncing issue when visiting `whmcsconnect.php`.
+
 ### Sponsorship
 
 This project is sponsored by [Ngage Hosting](https://www.ngagehosting.uk).
