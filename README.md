@@ -6,6 +6,8 @@ This is an unofficial Google Chrome extension for [WHMCS](https://www.whmcs.com)
 * An icon with badge indicating the current total pending count.
 * Notifications triggered when the count increases.
 
+![Screenshot](https://i.imgur.com/ybrqALT.jpg)
+
 ### Installation
 You can install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/whmcs-notifier/hodfnepodddflpcilaccjbgfnkbgffjc). If you to prefer to install from source, just download the source, visit `chrome://extensions` and use the "Load unpacked extension..." option to let Chrome know which directory the source lives in.
 
@@ -13,7 +15,7 @@ Following installation you'll need to access the extension's options page and co
 
 ### Usage
 
-There isn't much to explain, the extension does what it says on the tin!
+There's not much to explain, the extension does what it says on the tin!
 
 You can click on the extension's notifications to open a new tab on the appropriate WHMCS page (either pending orders or pending tickets). You can also click on the icon in your browser window to highlight the existing WHMCS tab or open a new one. To avoid loss of any unsubmitted form data, the extension will never reload existing tabs.
 
