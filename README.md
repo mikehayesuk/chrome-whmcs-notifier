@@ -25,12 +25,14 @@ Installing this extension will prompt you to allow the extension to "Read and ch
 ### Disclaimer
 This was created for my own personal needs as a quick weekend project. The source code isn't perfect and shortcuts may have been made in places.
 
+The extension does not use the WHMCS external API, so you're expected to be using the default admin theme ("blend") for the correct values to be read from HTML.
+
 ### Changelog
 
 ##### 2015-01-17 1.0.0
 First version released, Hello World!
 
-##### 2015-01-17 1.0.1
+##### 2015-01-18 1.0.1
 Fixed a syncing issue when visiting `whmcsconnect.php`.
 
 ### Sponsorship
