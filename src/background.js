@@ -75,7 +75,6 @@
       details.isClickable = true;
 
       chrome.notifications.update(id, details, function (wasUpdated) {
-        console.log(wasUpdated, previousCount);
         if (!wasUpdated && count > previousCount) {
           chrome.notifications.create(id, details);
         }
