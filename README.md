@@ -29,13 +29,13 @@ The extension does not use the WHMCS external API, so you're expected to be usin
 
 ### Changelog
 
-##### 2015-01-17 1.0.0
+##### 2016-01-17 1.0.0
 First version released, Hello World!
 
-##### 2015-01-18 1.0.1
+##### 2016-01-18 1.0.1
 Fixed a syncing issue when visiting `whmcsconnect.php`.
 
-##### 2015-02-11 1.0.2
+##### 2016-02-11 1.0.2
 Remove unnecessary code from notifications. Hopefully this update fixes the repeat notification issue, however I'm struggling to reproduce this problem accurately.
 
 ### Sponsorship
