@@ -65,7 +65,7 @@
 
     if (!count) {
       chrome.notifications.clear(id);
-    } else {
+    } else if (count > previousCount) {
       var details = {};
       details.type = 'basic';
       details.iconUrl = 'icons/notification.png';
@@ -74,11 +74,7 @@
       details.contextMessage = 'WHMCS Notifier';
       details.isClickable = true;
 
-      chrome.notifications.update(id, details, function (wasUpdated) {
-        if (!wasUpdated && count > previousCount) {
-          chrome.notifications.create(id, details);
-        }
-      });
+      chrome.notifications.create(id, details);
     }
   }
 

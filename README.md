@@ -35,6 +35,9 @@ First version released, Hello World!
 ##### 2015-01-18 1.0.1
 Fixed a syncing issue when visiting `whmcsconnect.php`.
 
+##### 2015-02-11 1.0.2
+Remove unnecessary code from notifications. Hopefully this update fixes the repeat notification issue, however I'm struggling to reproduce this problem accurately.
+
 ### Sponsorship
 
 This project is sponsored by [Ngage Hosting](https://www.ngagehosting.uk).
