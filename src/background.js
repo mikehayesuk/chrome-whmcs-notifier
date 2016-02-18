@@ -2,7 +2,7 @@
   'use strict';
 
   var CONFIG = {};
-  var LAST_COUNTS = {orders: 0, tickets: 0};
+  var LAST_COUNTS;
 
   function buildConfig() {
     return new Promise((resolve, reject) => {
@@ -33,30 +33,40 @@
     });
   }
 
+  function buildLastCounts() {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get('lastCounts', items => {
+        LAST_COUNTS = items.lastCounts || {orders: 0, tickets: 0};
+        resolve(LAST_COUNTS);
+      });
+    });
+  }
+
   function handleFreshCounts(counts) {
     if (counts == null || (!CONFIG.monitorOrders && !CONFIG.monitorTickets)) {
       setBrowserActionStatus(null);
       updateNotification('orders', 0);
       updateNotification('tickets', 0);
-      LAST_COUNTS = {orders: 0, tickets: 0};
-      return;
+      counts = {orders: 0, tickets: 0};
+    } else {
+      var total = 0;
+
+      if (CONFIG.monitorOrders && counts.orders) {
+        total += counts.orders;
+      }
+
+      if (CONFIG.monitorTickets && counts.tickets) {
+        total += counts.tickets;
+      }
+
+      setBrowserActionStatus(total);
+      updateNotification('orders', counts.orders);
+      updateNotification('tickets', counts.tickets);
     }
-
-    var total = 0;
-
-    if (CONFIG.monitorOrders && counts.orders) {
-      total += counts.orders;
-    }
-
-    if (CONFIG.monitorTickets && counts.tickets) {
-      total += counts.tickets;
-    }
-
-    setBrowserActionStatus(total);
-    updateNotification('orders', counts.orders);
-    updateNotification('tickets', counts.tickets);
 
     LAST_COUNTS = counts;
+
+    chrome.storage.local.set({lastCounts: LAST_COUNTS});
   }
 
   function updateNotification(type, count) {
@@ -188,7 +198,7 @@
     chrome.notifications.clear(notificationId);
   }
 
-  buildConfig().then(() => {
+  buildConfig().then(buildLastCounts).then(() => {
     chrome.alarms.create('poll', {periodInMinutes: 1});
     chrome.alarms.onAlarm.addListener(pollWHMCS);
     chrome.tabs.onUpdated.addListener(handleTabReload);
