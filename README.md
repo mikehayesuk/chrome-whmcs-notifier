@@ -40,7 +40,3 @@ Remove unnecessary code from notifications. Hopefully this update fixes the repe
 
 ##### 2016-02-18 1.0.3
 Fixed repeat notification issue. This was caused by the background page being killed while inactive, destroying the state each time. The last known notification counts are now stored in chrome.storage for persistence.
-
-### Sponsorship
-
-This project is sponsored by [Ngage Hosting](https://www.ngagehosting.uk).
