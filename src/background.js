@@ -6,7 +6,7 @@
 
   function buildConfig() {
     return new Promise((resolve, reject) => {
-      var keys = ['whmcsUrl', 'monitorOrders', 'monitorTickets'];
+      var keys = ['whmcsUrl', 'monitorOrders', 'monitorTickets', 'showNotifications'];
 
       // Populate the initial config object.
       chrome.storage.sync.get(keys, items => {
@@ -75,7 +75,7 @@
 
     if (!count) {
       chrome.notifications.clear(id);
-    } else if (count > previousCount) {
+    } else if (count > previousCount && CONFIG.showNotifications) {
       var details = {};
       details.type = 'basic';
       details.iconUrl = 'icons/notification.png';
