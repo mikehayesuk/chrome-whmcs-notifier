@@ -6,10 +6,15 @@
 
   function buildConfig() {
     return new Promise((resolve, reject) => {
-      var keys = ['whmcsUrl', 'monitorOrders', 'monitorTickets', 'showNotifications'];
+      var defaultConfig = {
+        whmcsUrl: '',
+        monitorOrders: true,
+        monitorTickets: true,
+        showNotifications: true
+      };
 
       // Populate the initial config object.
-      chrome.storage.sync.get(keys, items => {
+      chrome.storage.sync.get(defaultConfig, items => {
         Object.assign(CONFIG, items);
         resolve(CONFIG);
       });
@@ -20,7 +25,7 @@
         var updated = false;
 
         Object.keys(changes).forEach(key => {
-          if (keys.indexOf(key) >= 0) {
+          if (typeof defaultConfig[key] !== 'undefined') {
             updated = true;
             CONFIG[key] = changes[key].newValue;
           }
