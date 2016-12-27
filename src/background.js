@@ -106,19 +106,6 @@
     }
   }
 
-  function makeHttpRequest(url) {
-    return new Promise((resolve, reject) => {
-      // XHR is used here because the fetch API doesn't seem to share the same
-      // cookie store as general content/tabbed requests, where as XHR does.
-      var xhr = new XMLHttpRequest();
-      xhr.addEventListener('load', ev => resolve(xhr.responseText));
-      xhr.addEventListener('error', ev => reject(ev));
-      xhr.addEventListener('abort', ev => reject(ev));
-      xhr.open('GET', url, true);
-      xhr.send(null);
-    });
-  }
-
   function pollWHMCS() {
     if (!CONFIG.whmcsUrl) {
       console.debug('Polling aborted, no WHMCS URL configured.');
@@ -130,22 +117,31 @@
       return;
     }
 
-    makeHttpRequest(CONFIG.whmcsUrl).then(responseText => {
+    fetch(CONFIG.whmcsUrl, {
+      credentials: 'include'
+    }).then(response => {
+      if (response.status !== 200) {
+        throw new Error('The response code must be 200.');
+      }
+
+      return response.text();
+    }).then(html => {
       var parser = new DOMParser();
-      var doc = parser.parseFromString(responseText, 'text/html');
+      var doc = parser.parseFromString(html, 'text/html');
       var statsEl = doc.querySelector('div.header div.stats');
 
-      if (statsEl) {
-        var statEls = statsEl.querySelectorAll('span.stat');
-        var data = {};
-        data.orders = parseInt(statEls[0].innerText, 10);
-        data.tickets = parseInt(statEls[2].innerText, 10);
-        handleFreshCounts(data);
-      } else {
-        handleFreshCounts(null);
+      if (!statsEl) {
+        throw new Error('Failed to parse the stats element.');
       }
-    }, error => {
+
+      var statEls = statsEl.querySelectorAll('span.stat');
+      var data = {};
+      data.orders = parseInt(statEls[0].innerText, 10);
+      data.tickets = parseInt(statEls[2].innerText, 10);
+      handleFreshCounts(data);
+    }).catch(error => {
       handleFreshCounts(null);
+      console.warn('Polling failed.', error);
     });
   }
 
